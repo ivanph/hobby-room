@@ -2,6 +2,11 @@ require('dotenv').config();
 const hapi = require('hapi');
 const glue = require('glue');
 
+const pinoOptions = {
+  prettyPrint: true,
+  allTags: 'trace'
+}
+
 let internals = {
   manifest: {
     connections: [
@@ -9,12 +14,19 @@ let internals = {
     ],
     registrations: [
       { plugin: './plugins/reportsDB' },
-      { plugin: './plugins/routes' }
+      { plugin: './plugins/routes' },
+      { plugin: 'vision' },
+      { plugin : { register: 'hapi-pino', options: pinoOptions }}
     ]
   }
 };
 
 let startServer = function (server) {
+  server.views({
+    engines: { pug: require('pug') },
+    path: __dirname + '/views',
+    isCached: false
+  });
   server.start(function () {
     server.connections.forEach((connection) => {
       let label = connection.settings.labels[0];

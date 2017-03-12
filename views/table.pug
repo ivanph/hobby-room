@@ -1,0 +1,33 @@
+div.page-header
+h1 Reports
+div
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th #
+        th timestamp
+        th roomTemp [F]
+        th roomHumidity [%]
+        th roomCO2 [PPM]
+        th roomLUX
+        th nuteTemp [F]
+        th nuteConductivity [S/cm]
+        th nutePH
+        th nuteDO [PPM]
+        th nuteFlow [ml/min]
+        th nuteLevel
+    tbody
+      each val,i in reports
+        tr
+          td #{i+1}
+          td= val.timestamp
+          td= val.roomTemp
+          td= val.roomHumidity
+          td= val.roomCO2
+          td= val.roomLUX
+          td= val.nuteTemp
+          td= val.nuteConductivity
+          td= val.nutePH
+          td= val.nuteDO
+          td= val.nuteFlow
+          td= val.nuteLevel

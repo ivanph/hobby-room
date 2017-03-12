@@ -1,13 +1,6 @@
 const nedb = require('nedb');
 const dbname = 'reports';
-let reports = new nedb({ filename: './' + dbname + '.nedb' });
-
-reports.loadDatabase(function (err) {
-  if (err) {
-    console.log('Failed to load db', err);
-    process.abort();
-  }
-});
+let reports = new nedb({ filename: './' + dbname + '.nedb', autoload: true });
 
 module.exports.reportsDB = reports;
 
